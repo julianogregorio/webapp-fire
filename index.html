@@ -7,12 +7,25 @@
 </head>
 <body>
     <h1>WEBAPP-FIRE</h1>
-    <p>Bem-vindo ao WEBAPP-FIRE, a aplicação web para monitoramento de incêndios florestais. Este aplicativo utiliza dados de satélite para detectar e monitorar incêndios em tempo real, fornecendo informações valiosas para a prevenção e combate a incêndios.</p>
+    <p>Bem-vindo ao WEBAPP-FIRE, a aplicação web para monitoramento de incêndios florestais.</p>
 
     <div>Teachable Machine Image Model</div>
 <button type="button" onclick="init()">Start</button>
+
 <div id="webcam-container"></div>
 <div id="label-container"></div>
+
+<!--Elemento para submeter a imagem-->
+
+<div style="margin-top: 20px; border: 1px dashed #ccc; padding: 10px;">
+        <h3>Testar com Arquivo (Dataset)</h3>
+        <input type="file" id="file-input" accept="image/*" onchange="predictFromFile()">
+        <div id="file-preview-container" style="margin-top: 10px;"></div>
+    </div>
+
+
+<!--Scripts-->
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
