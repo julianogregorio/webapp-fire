@@ -55,49 +55,58 @@ async function predict() {
 
 //permitir submeter um arquivo para predição 
 
+async function loadModel(){
 
-async function loadModel() {
-    const modelURL = URL + & quot; model.json & quot;;
-    const metadataURL = URL + & quot; metadata.json & quot;;
+
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+
+
     // load the model and metadata
-    // Refer to tmImage.loadFromFiles() in the API to support files from a file
-    picker
-        // or files from your local hard drive
-        // Note: the pose library adds &quot;tmImage&quot; object to your window
-        (window.tmImage)
+    // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+    // or files from your local hard drive
+    // Note: the pose library adds "tmImage" object to your window (window.tmImage)
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
-    labelContainer = document.getElementById(& quot; label - container & quot;);
+    labelContainer = document.getElementById("label-container");
+
+
 }
 
 async function predictFromFile() {
-    const fileInput = document.getElementById(&#39; file - input &#39;);
-    const previewContainer = document.getElementById(&#39; file - preview - container &#39;);
-
-    if (fileInput.files & amp;& amp; fileInput.files[0]) {
+    const fileInput = document.getElementById('file-input');
+    const previewContainer = document.getElementById('file-preview-container');
+    
+    if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
+
+
         reader.onload = async function (e) {
-            previewContainer.innerHTML = `&lt;img id=&quot;target-image&quot;
-src=&quot;${e.target.result}&quot; width=&quot;200&quot; style=&quot;border-radius: 8px;&quot;&gt;`;
-            const imgElement = document.getElementById(&#39; target -
-                image &#39;);
-            imgElement.onload = async() =& gt; {
-                await runStaticPrediction(imgElement);
+            previewContainer.innerHTML = `<img id="target-image" src="${e.target.result}" width="200" style="border-radius: 8px;">`;
+                        const imgElement = document.getElementById('target-image');
+            imgElement.onload = async () => {
+                          await runStaticPrediction(imgElement);
             };
         };
+
+
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
 
 /**
  * Função: Executa a predição em um elemento de imagem estático
- * @param {HTMLImageElement} imgElement
+ * @param {HTMLImageElement} imgElement 
  */
 async function runStaticPrediction(imgElement) {
-    if (model == null)
+    if (model == null) 
         await loadModel();
-
+     
     const prediction = await model.predict(imgElement);
     predictClass(prediction);
-
+    
 }
+
+
+
+
