@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html lang="portuguese-BR">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEBAPP-FIRE</title>
 </head>
+
 <body>
     <h1>WEBAPP-FIRE</h1>
     <p>Bem-vindo ao WEBAPP-FIRE, a aplicação web para monitoramento de incêndios florestais.</p>
 
     <div>Teachable Machine Image Model</div>
-<button type="button" onclick="init()">Start</button>
+    <button type="button" onclick="init()">Start</button>
 
-<div id="webcam-container"></div>
-<div id="label-container"></div>
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
 
-<!--Elemento para submeter a imagem-->
+    <!--Elemento para submeter a imagem-->
 
-<div style="margin-top: 20px; border: 1px dashed #ccc; padding: 10px;">
+    <div style="margin-top: 20px; border: 1px dashed #ccc; padding: 10px;">
         <h3>Testar com Arquivo (Dataset)</h3>
         <input type="file" id="file-input" accept="image/*" onchange="predictFromFile()">
         <div id="file-preview-container" style="margin-top: 10px;"></div>
     </div>
 
 
-<!--Scripts-->
+    <!--Scripts-->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-<script src="script.js"></script>
+    <script src="js/script.js"></script>
 
 
 
 </body>
+
 </html>
