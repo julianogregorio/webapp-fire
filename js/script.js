@@ -44,27 +44,16 @@ async function runStaticPrediction(imgElement) {
     predictClass(prediction);
 }
 
-// Exibe o resultado da predição
+// Exibe todas as probabilidades na tela
 function predictClass(prediction) {
-    let highestProb = 0;
-    let bestClass = "";
+    labelContainer.innerHTML = ""; // limpa resultados anteriores
 
-    for (let i = 0; i < maxPredictions; i++) {
-        if (prediction[i].probability > highestProb) {
-            highestProb = prediction[i].probability;
-            bestClass = prediction[i].className;
-        }
-    }
-
-    let statusColor = "#2ecc71"; 
-    if (bestClass.toLowerCase().includes("no") || bestClass.toLowerCase().includes("sem")) {
-        statusColor = "#e74c3c";
-    }
-
-    labelContainer.innerHTML = `
-        <div style="background: #f0f0f0; padding: 10px; border-radius: 5px; border-left: 5px solid ${statusColor}">
-            <strong>RESULTADO DO ARQUIVO:</strong>
-            <h2 style="color: ${statusColor}; margin: 5px 0;">${bestClass.toUpperCase()}</h2>
-            <small>Confiança: ${(highestProb * 100).toFixed(2)}%</small>
-        </div>`;
+    prediction.forEach(p => {
+        const div = document.createElement("div");
+        div.style.margin = "5px 0";
+        div.innerHTML = `
+            <strong>${p.className.toUpperCase()}</strong>: ${(p.probability * 100).toFixed(2)}%
+        `;
+        labelContainer.appendChild(div);
+    });
 }
