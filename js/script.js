@@ -43,10 +43,6 @@ async function runStaticPrediction(imgElement) {
 
     console.log("Dimensões da imagem:", imgElement.width, imgElement.height);
 
-    // Predição usando imgElement direto
-    const predictionImg = await model.predict(imgElement);
-    console.log("Predição com imgElement:", predictionImg);
-
     // Criar um canvas 224x224 e desenhar a imagem nele
     const canvas = document.createElement("canvas");
     canvas.width = 224;
@@ -54,12 +50,18 @@ async function runStaticPrediction(imgElement) {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(imgElement, 0, 0, 224, 224);
 
-    // Predição usando canvas redimensionado
-    const predictionCanvas = await model.predict(canvas);
-    console.log("Predição com canvas:", predictionCanvas);
+    // Normalizar manualmente os pixels (0–255 → 0–1)
+    const imageTensor = tf.browser.fromPixels(canvas)
+        .toFloat()
+        .div(tf.scalar(255))
+        .expandDims(0);
 
-    // Exibir resultados do canvas (mais confiável)
-    predictClass(predictionCanvas);
+    // Predição usando tensor normalizado
+    const prediction = await model.predict(imageTensor);
+    console.log("Predição com normalização manual:", prediction);
+
+    // Exibir resultados
+    predictClass(prediction);
 }
 
 // Exibe todas as probabilidades na tela
