@@ -40,7 +40,16 @@ async function runStaticPrediction(imgElement) {
     if (model == null) {
         await loadModel();
     }
-    const prediction = await model.predict(imgElement);
+
+    // Criar um canvas 224x224 e desenhar a imagem nele
+    const canvas = document.createElement("canvas");
+    canvas.width = 224;
+    canvas.height = 224;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(imgElement, 0, 0, 224, 224);
+
+    // Usar o canvas redimensionado como entrada
+    const prediction = await model.predict(canvas);
     predictClass(prediction);
 }
 
