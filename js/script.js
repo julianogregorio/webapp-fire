@@ -41,6 +41,12 @@ async function runStaticPrediction(imgElement) {
         await loadModel();
     }
 
+    console.log("Dimensões da imagem:", imgElement.width, imgElement.height);
+
+    // Predição usando imgElement direto
+    const predictionImg = await model.predict(imgElement);
+    console.log("Predição com imgElement:", predictionImg);
+
     // Criar um canvas 224x224 e desenhar a imagem nele
     const canvas = document.createElement("canvas");
     canvas.width = 224;
@@ -48,14 +54,19 @@ async function runStaticPrediction(imgElement) {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(imgElement, 0, 0, 224, 224);
 
-    // Usar o canvas redimensionado como entrada
-    const prediction = await model.predict(canvas);
-    predictClass(prediction);
+    // Predição usando canvas redimensionado
+    const predictionCanvas = await model.predict(canvas);
+    console.log("Predição com canvas:", predictionCanvas);
+
+    // Exibir resultados do canvas (mais confiável)
+    predictClass(predictionCanvas);
 }
 
 // Exibe todas as probabilidades na tela
 function predictClass(prediction) {
     labelContainer.innerHTML = ""; // limpa resultados anteriores
+
+    console.log("Valores brutos:", prediction);
 
     prediction.forEach(p => {
         const div = document.createElement("div");
