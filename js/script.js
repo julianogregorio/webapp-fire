@@ -50,15 +50,9 @@ async function runStaticPrediction(imgElement) {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(imgElement, 0, 0, 224, 224);
 
-    // Normalizar manualmente os pixels (0–255 → 0–1)
-    const imageTensor = tf.browser.fromPixels(canvas)
-        .toFloat()
-        .div(tf.scalar(255))
-        .expandDims(0);
-
-    // Predição usando tensor normalizado
-    const prediction = await model.predict(imageTensor);
-    console.log("Predição com normalização manual:", prediction);
+    // Predição usando canvas redimensionado (tmImage já normaliza internamente)
+    const prediction = await model.predict(canvas);
+    console.log("Predição com canvas:", prediction);
 
     // Exibir resultados
     predictClass(prediction);
