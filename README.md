@@ -1,6 +1,6 @@
 # Projeto Reconhecimento de Imagens: webapp-fire
 
-# # Modelo de IA com Teachable Machine
+## Modelo de IA com Teachable Machine
 
 
 Este projeto é parte de um trabalho acadêmico voltado para o reconhecimento de imagens utilizando **Teachable Machine**, uma ferramenta de aprendizado de máquina acessível e prática.
