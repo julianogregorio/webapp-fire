@@ -1,8 +1,6 @@
-
 const URL = "./my_model/";
 
 let model, labelContainer, maxPredictions;
-
 
 async function loadModel() {
     const modelURL = URL + "model.json";
@@ -12,7 +10,6 @@ async function loadModel() {
     maxPredictions = model.getTotalClasses();
     labelContainer = document.getElementById("label-container");
 }
-
 
 async function predictFromFile() {
     const fileInput = document.getElementById('file-input');
@@ -42,21 +39,17 @@ async function runStaticPrediction(imgElement) {
 
     console.log("Dimensões da imagem:", imgElement.width, imgElement.height);
 
-    
     const canvas = document.createElement("canvas");
     canvas.width = 224;
     canvas.height = 224;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(imgElement, 0, 0, 224, 224);
 
-    
     const prediction = await model.predict(canvas);
     console.log("Predição com canvas:", prediction);
 
-    
     predictClass(prediction);
 }
-
 
 function predictClass(prediction) {
     labelContainer.innerHTML = ""; 
@@ -67,15 +60,14 @@ function predictClass(prediction) {
         const div = document.createElement("div");
         div.style.margin = "5px 0";
 
-        
-        let label = p.className.toUpperCase();
+        // Usando minúsculo para comparar
+        let label = p.className;
         if (label === "fire") label = "INCÊNDIO";
         if (label === "nofire") label = "ÁREA PRESERVADA";
 
-        
         if (label === "INCÊNDIO") {
             div.className = "result-incendio";
-        } else {
+        } else if (label === "ÁREA PRESERVADA") {
             div.className = "result-preservada";
         }
 
