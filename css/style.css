@@ -1,3 +1,4 @@
+/* style.css */
 body {
     font-family: 'Roboto', Arial, sans-serif;
     background-color: #f4f4f9;
@@ -29,22 +30,12 @@ p {
     margin-bottom: 20px;
 }
 
-#label-container div {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 8px 0;
-    padding: 10px;
+.upload-box {
+    margin-top: 20px;
+    border: 2px dashed #ccc;
+    padding: 15px;
     border-radius: 8px;
-}
-
-.result-incendio {
-    background-color: #ffdddd;
-    color: #c0392b;
-}
-
-.result-preservada {
-    background-color: #ddffdd;
-    color: #27ae60;
+    background-color: #fafafa;
 }
 
 #file-preview-container img {
@@ -52,4 +43,14 @@ p {
     height: auto;
     border-radius: 8px;
     margin-top: 15px;
+}
+
+#label-container div {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #eef;
+    color: #333;
 }
