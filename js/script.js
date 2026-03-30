@@ -69,8 +69,8 @@ function predictClass(prediction) {
 
         
         let label = p.className.toUpperCase();
-        if (label === "FIRE") label = "INCÊNDIO";
-        if (label === "NOFIRE") label = "ÁREA PRESERVADA";
+        if (label === "fire") label = "INCÊNDIO";
+        if (label === "nofire") label = "ÁREA PRESERVADA";
 
         
         if (label === "INCÊNDIO") {
