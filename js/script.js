@@ -60,14 +60,13 @@ function predictClass(prediction) {
         const div = document.createElement("div");
         div.style.margin = "5px 0";
 
-        // Usando minúsculo para comparar
+        // Comparação correta em minúsculo
         let label = p.className;
-        if (label === "fire") label = "INCÊNDIO";
-        if (label === "nofire") label = "ÁREA PRESERVADA";
-
-        if (label === "INCÊNDIO") {
+        if (label === "fire") {
+            label = "INCÊNDIO";
             div.className = "result-incendio";
-        } else if (label === "ÁREA PRESERVADA") {
+        } else if (label === "nofire") {
+            label = "ÁREA PRESERVADA";
             div.className = "result-preservada";
         }
 
