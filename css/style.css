@@ -1,0 +1,55 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#label-container div {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.result-incendio {
+    background-color: #ffdddd;
+    color: #c0392b;
+}
+
+.result-preservada {
+    background-color: #ddffdd;
+    color: #27ae60;
+}
+
+#file-preview-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}

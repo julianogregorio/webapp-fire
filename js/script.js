@@ -1,9 +1,9 @@
-// Link para o modelo exportado pelo Teachable Machine
+
 const URL = "./my_model/";
 
 let model, labelContainer, maxPredictions;
 
-// Carregar o modelo
+
 async function loadModel() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -13,7 +13,7 @@ async function loadModel() {
     labelContainer = document.getElementById("label-container");
 }
 
-// Função para ler o arquivo enviado pelo usuário
+
 async function predictFromFile() {
     const fileInput = document.getElementById('file-input');
     const previewContainer = document.getElementById('file-preview-container');
@@ -35,7 +35,6 @@ async function predictFromFile() {
     }
 }
 
-// Executa a predição em uma imagem estática
 async function runStaticPrediction(imgElement) {
     if (model == null) {
         await loadModel();
@@ -43,32 +42,45 @@ async function runStaticPrediction(imgElement) {
 
     console.log("Dimensões da imagem:", imgElement.width, imgElement.height);
 
-    // Criar um canvas 224x224 e desenhar a imagem nele
+    
     const canvas = document.createElement("canvas");
     canvas.width = 224;
     canvas.height = 224;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(imgElement, 0, 0, 224, 224);
 
-    // Predição usando canvas redimensionado (tmImage já normaliza internamente)
+    
     const prediction = await model.predict(canvas);
     console.log("Predição com canvas:", prediction);
 
-    // Exibir resultados
+    
     predictClass(prediction);
 }
 
-// Exibe todas as probabilidades na tela
+
 function predictClass(prediction) {
-    labelContainer.innerHTML = ""; // limpa resultados anteriores
+    labelContainer.innerHTML = ""; 
 
     console.log("Valores brutos:", prediction);
 
     prediction.forEach(p => {
         const div = document.createElement("div");
         div.style.margin = "5px 0";
+
+        
+        let label = p.className.toUpperCase();
+        if (label === "FIRE") label = "INCÊNDIO";
+        if (label === "NOFIRE") label = "ÁREA PRESERVADA";
+
+        
+        if (label === "INCÊNDIO") {
+            div.className = "result-incendio";
+        } else {
+            div.className = "result-preservada";
+        }
+
         div.innerHTML = `
-            <strong>${p.className.toUpperCase()}</strong>: ${(p.probability * 100).toFixed(2)}%
+            <strong>${label}</strong>: ${(p.probability * 100).toFixed(2)}%
         `;
         labelContainer.appendChild(div);
     });
